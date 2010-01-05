@@ -1,6 +1,12 @@
 class Select
   def initialize(element)
-    element.tag_name
-    raise UnexpectedTagNameError.new
+    @element = element
+    raise UnexpectedTagNameError.new if element.tag_name != 'select'
   end
+
+  def multiple?
+    @element.attribute('multiple') 
+    true
+  end
+
 end
