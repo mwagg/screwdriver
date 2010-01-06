@@ -14,4 +14,7 @@ class Select
     return true
   end
 
+  def options
+    @element.find_elements(:tag_name, 'option')
+  end
 end
