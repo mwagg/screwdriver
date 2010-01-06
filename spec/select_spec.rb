@@ -1,5 +1,5 @@
 require 'spec'
-require 'spec/spec_helper'
+require 'spec_helper'
 
 describe Select do
   it "should throw an exception if the element is not a select element" do
@@ -18,14 +18,14 @@ describe Select do
     a_multiple_select.stub(:tag_name).and_return('select')
     a_multiple_select.should_receive(:attribute).with('multiple').and_return('multiple')
 
-    select = Select.new(a_select)
+    select = Select.new(a_multiple_select)
     select.multiple?.should be_true
   end
 
   it "should not indicate that a normal select supports multiple options" do
     a_normal_select = mock(:select)
     a_normal_select .stub(:tag_name).and_return('select')
-    a_normal_select.should_receive(:attribute).with('multiple').and_throw(Selenium::WebDriver::Error::WebDriverError.new)
+    a_normal_select.should_receive(:attribute).with('multiple').and_raise(Selenium::WebDriver::Error::WebDriverError)
 
     select = Select.new(a_normal_select)
     select.multiple?.should be_false

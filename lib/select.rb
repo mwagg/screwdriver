@@ -5,8 +5,13 @@ class Select
   end
 
   def multiple?
-    @element.attribute('multiple') 
-    true
+    begin
+      @element.attribute('multiple')
+    rescue Selenium::WebDriver::Error::WebDriverError
+      return false
+    end
+
+    return true
   end
 
 end
