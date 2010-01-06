@@ -17,4 +17,8 @@ class Select
   def options
     @element.find_elements(:tag_name, 'option')
   end
+
+  def selected_options
+    options.select { |option| option.selected? }
+  end
 end

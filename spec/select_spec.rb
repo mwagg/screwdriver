@@ -44,4 +44,23 @@ describe Select do
 
     returned_options.should equal(options)
   end
+
+  it "should return options which are selected" do
+    a_select = mock(:select)
+    good_option = mock(:good_option)
+    bad_option = mock(:bad_option)
+    options = [bad_option, good_option]
+
+    a_select.stub(:tag_name).and_return('select')
+    a_select.stub(:attribute?).with('multiple').and_return('multiple')
+    a_select.should_receive(:find_elements).with(:tag_name, 'option').and_return(options)
+    bad_option.should_receive(:selected?).and_return(false)
+    good_option.should_receive(:selected?).and_return(true)
+
+    select = Select.new(a_select)
+    returned_options = select.selected_options
+
+    returned_options.length.should == 1
+    returned_options[0].should equal(good_option)
+  end
 end
