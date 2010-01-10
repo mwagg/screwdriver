@@ -9,3 +9,4 @@ end
 
 require 'select'
 require 'unexpected_tag_name_error'
+require 'no_such_element_error'

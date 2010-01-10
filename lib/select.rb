@@ -5,13 +5,7 @@ class Select
   end
 
   def multiple?
-    begin
-      @element.attribute('multiple')
-    rescue Selenium::WebDriver::Error::WebDriverError
-      return false
-    end
-
-    return true
+    @element.attribute('multiple') != nil
   end
 
   def options
@@ -20,5 +14,24 @@ class Select
 
   def selected_options
     options.select { |option| option.selected? }
+  end
+
+  def first_selected_option
+    options = selected_options
+    raise NoSuchElementError if (options.length == 0)
+
+    options[0]
+  end
+
+  def select_by_visible_text(text)
+    
+  end
+
+  def select_by_index(index)
+    
+  end
+
+  def select_by_value(value)
+    
   end
 end
